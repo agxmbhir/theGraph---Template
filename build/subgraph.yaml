@@ -1,0 +1,24 @@
+specVersion: 0.0.3
+description: USDT Subgraph
+schema:
+  file: token.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Transfer
+    network: mainnet
+    source:
+      address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+      abi: USDT
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: Transfer\Transfer.wasm
+      entities:
+        - Transfer
+      abis:
+        - name: USDT
+          file: Transfer\abi\USDT.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
